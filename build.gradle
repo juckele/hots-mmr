@@ -1,0 +1,24 @@
+    repositories {
+        jcenter()
+    }
+
+    task eclipseSetup {
+        description = "Cleans and generates eclipse project/classpath files that are not under version controlled."
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    eclipseSetup.dependsOn cleanEclipseProject
+    eclipseSetup.dependsOn eclipseProject
+    eclipseSetup.dependsOn cleanEclipseClasspath
+    eclipseSetup.dependsOn eclipseClasspath
+
+    dependencies {
+        compile 'org.apache.commons:commons-lang3:3.5'
+        compile 'com.google.guava:guava:22.0'
+        testCompile "junit:junit:4.+"
+    }
